@@ -1,49 +1,33 @@
 pipeline {
     agent any
-
+ 
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from GitHub
+                git 'https://github.com/surendramarkowate/hello-world-html'
+            }
+        }
+ 
         stage('Build') {
             steps {
-                // Clean up the workspace
-                sh "make clean"
-
-                // Build the project
-                sh "make build"
+                // Perform build steps here if necessary
+                sh 'echo "Build step: replace with actual build commands"'
             }
         }
-
-        stage('Test') {
-            steps {
-                // Run tests
-                sh "make test"
-            }
-        }
-
+ 
         stage('Deploy') {
             steps {
-                // Deploy the application
-                sh "make deploy"
+                // Deployment steps (example: copying files to a server)
+                sh 'echo "Deploy step: replace with actual deployment commands"'
             }
         }
     }
-
+ 
     post {
         always {
-            // Clean up after the build
-            sh "make clean"
+            // Clean up steps (if needed)
+            sh 'echo "Post-processing: clean up or final steps"'
         }
     }
-}
-
-// Scripts for build, test, and deployment
-stage('Build') {
-    // Execute code for building the project
-}
-
-stage('Test') {
-    // Execute code for testing the project
-}
-
-stage('Deploy') {
-    // Execute code for deploying the project
 }
