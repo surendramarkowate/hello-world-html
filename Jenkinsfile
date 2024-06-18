@@ -1,33 +1,22 @@
 pipeline {
     agent any
- 
+
     stages {
-        stage('Checkout') {
+        stage('Checkout SCM') {
             steps {
-                // Checkout the source code from GitHub
-                git 'https://github.com/surendramarkowate/hello-world-html'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                          userRemoteConfigs: [[url: 'https://github.com/surendramarkowate/hello-world-html', credentialsId: 'surendramarkowategithub']]])
             }
         }
- 
         stage('Build') {
             steps {
-                // Perform build steps here if necessary
-                sh 'echo "Build step: replace with actual build commands"'
+                echo 'Building...'
             }
         }
- 
         stage('Deploy') {
             steps {
-                // Deployment steps (example: copying files to a server)
-                sh 'echo "Deploy step: replace with actual deployment commands"'
+                echo 'Deploying...'
             }
-        }
-    }
- 
-    post {
-        always {
-            // Clean up steps (if needed)
-            sh 'echo "Post-processing: clean up or final steps"'
         }
     }
 }
